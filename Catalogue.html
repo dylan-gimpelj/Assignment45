@@ -1,0 +1,57 @@
+//Things the script needs: 
+//with all the options of quantity, clickbox, image, etc, 
+//submit button only clickable when user login
+//drop down menu
+//update inventory csv after with all changes 
+
+
+<html>
+<head>
+	<title>SSMU Sell-Out Catalogue</title>
+	
+<html>
+<head>
+	<title>SSMU'S Sell-Out Selections</title>
+</head>
+<p><font size="15">SSMU'S SELL-OUT SELECTIONS</font></p>
+<p>All revenues will go towards throwing an even more extravagent but just as boring 4Floors</p>
+<body>
+<h1>PRODUCTS</h1>
+<form action="Purchase.py" method="POST" target="_blank"> <!--need to figure out where specifically to send form, in action-->
+<table border="1" style="width:100%">
+	<th>
+		<td>Image</td>
+		<td>Description</td>
+		<td>Price</td>
+		<td>Select?</td>
+		<td>Quantity</td>
+	</th>
+	<tr>
+		<td>SSMU Building</td>
+		<td>BLANK</td>
+		<td>The rent is just too damn high!</td>
+		<td>$1,000,000.00</td>
+		<td><input type="checkbox" name="option1" value="SSMUBUILDING"></td>
+		<td><Input type="number" name="item" value =0></td>
+	</tr>
+	<tr>
+		<td>The Nest</td>
+		<td>NO IMAGE</td>
+		<td>What even is this place??</td>
+		<td>You can't afford it</td>
+		<td><input type="checkbox" name="option2" value="TheNest"></td>
+		<td><Input type="number" name="item" value =0></td>
+	</tr>
+	<tr>
+		<td>1000 GA Voter Slips</td>
+		<td>No image</td>
+		<td>Never used due to a minority who want to silence democratic debate</td>
+		<td>$5.00</td>
+		<td><input type="checkbox" name="option3" value="Ballots"></td>
+		<td><Input type="number" name="item" value =0></td>
+	</tr>	
+</table>
+<input type="submit" value="Submit"> 
+</form>
+</body>
+</html>

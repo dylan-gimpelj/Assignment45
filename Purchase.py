@@ -26,16 +26,15 @@ form = cgi.FieldStorage()
 namenaked = form.getvalue('user') 
 namestr = str(namenaked)
 name = "'" + namestr + "'" 
-
+print namenaked, namestr, name 
 with open('LoggedIn.csv', 'r') as names:
 	compare = csv.reader(names, delimiter=",")
 	rows = list(compare) 
+	print rows
 	rows1 = []
-	for row in rows: 
-		member = str(row[0])
-		rows1.append(member)
-		
-	if name in rows1 or namenaked in rows1 or namestr in rows1:
+	print any(namestr in row for row in rows1)
+	print any(name in row for row in rows1)
+	if(any(namestr in row for row in rows1) or any(name in row for row in rows1)):
 		buildingamount = form.getvalue('build')			
 		nestamount = form.getvalue('thenest')
 		ballotsamount = form.getvalue('ballot')
@@ -49,7 +48,6 @@ with open('LoggedIn.csv', 'r') as names:
 		nestcst=0
 		ballotcst=0
 		buildingcst=0
-		
 		html = """<html>
 		<center>
 		<style type="text/css" >
@@ -78,25 +76,21 @@ with open('LoggedIn.csv', 'r') as names:
 				<td>Cost ($)</td>
 			</th>"""
 		html=html+htmlextra
-
 		if "nest" in check:
 			nestcst=nestpr*nestamount
 			nestq = nestq-nestamount
 			addnest = addRow("THE NEST CAFE", nestpr, nestamount)
 			html = html+addnest
-			
 		if "ballots" in check:
 			ballotcst=ballotspr*ballotsamount
 			ballotsq=ballotsq-ballotsamount
 			addballots = addRow("GA BALLOTS", ballotspr, ballotsamount)
 			html = html+addballots
-
 		if "building" in check:
 			buildingcst=buildingpr*buildingamount
 			buildingq=buildingq-buildingamount 
 			addbuilding = addRow("SSMU BROWN BUILIDNG", buildingpr, buildingamount)
 			html=html+addbuilding
-
 		with open('inventory.csv', 'wb') as invfile:
 			reader = csv.writer(invfile, delimiter=',')
 			reader.writerow(['nest', nestq, nestpr])
@@ -120,8 +114,8 @@ with open('LoggedIn.csv', 'r') as names:
 		<td></td>
 		<td></td>
 		<td>%s</td> </tr>"""%(total)
-		html = html+htmlsubtotal
 		html = html+htmltax
+		html = html+htmlsubtotal
 		html=html+htmltotal
 		htmlend = """</table> """
 		html=html+htmlend
@@ -133,9 +127,8 @@ with open('LoggedIn.csv', 'r') as names:
 		htmlfinal = """</html>"""
 		html=html+htmlfinal
 		print html
-		
-	else: 
-			
+
+	else: 	
 		notlogged = """<html> <header><h1>ERROR 2342384-3453143143143143143143143143141212121212199</h1></header> \
 		<body> 
 		  <p> We're sorry, you  are currently not logged in. Please select one of the following options:			<ul>
